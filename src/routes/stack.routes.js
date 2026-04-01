@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from '../screens/Home.js';
 import Vinhos from '../screens/Vinhos.js'; 
 import Exclusivos from '../screens/Exclusivos.js';
+import WineBox from '../screens/WineBox.js';
 import { SQLiteProvider } from 'expo-sqlite';
 import { initDatabase } from '../services/initDatabase.js';
 import Header from '../components/Header.js';
@@ -17,6 +18,7 @@ export function StackRoutes() {
                     <Screen name="Home" component={Home} />
                     <Screen name="Vinhos" component={Vinhos} />
                     <Screen name="Exclusivos" component={Exclusivos} />
+                    <Screen name="WineBox" component={WineBox} />
                 </Navigator>
             </NavigationContainer>
         </SQLiteProvider>

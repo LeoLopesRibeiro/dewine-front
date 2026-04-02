@@ -3,8 +3,11 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'rea
 import { useNavigation } from '@react-navigation/native';
 
 import QntItem from '../components/QntItem';
+<<<<<<< HEAD
 
 // Assets - Caminhos com 'icons'
+=======
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
 import FotoVinho from '../../assets/fotoExemplo.png';
 import SetaVoltar from '../../assets/icons/seta_voltar.png';
 import IconExcluir from '../../assets/icons/x.png';
@@ -12,7 +15,10 @@ import IconExcluir from '../../assets/icons/x.png';
 export default function Carrinho() {
   const navigation = useNavigation();
   
+<<<<<<< HEAD
   // Simulação de vários itens para testar o scroll interno
+=======
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
   const [items, setItems] = useState([
     { id: 1, name: 'Cabernet Sauvignon Watchful Eye', year: '2024', price: 110.29, quantity: 1 },
     { id: 2, name: 'Cabernet Sauvignon Watchful Eye', year: '2024', price: 110.29, quantity: 1 },
@@ -44,7 +50,10 @@ export default function Carrinho() {
   return (
     <View style={styles.container}>
       
+<<<<<<< HEAD
       {/* 1. TOPO FIXO (Não scrolla) */}
+=======
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
       <View style={styles.headerTitleRow}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
           <Image source={SetaVoltar} style={styles.backIcon} />
@@ -52,7 +61,10 @@ export default function Carrinho() {
         <Text style={styles.pageTitle}>Meu Carrinho</Text>
       </View>
 
+<<<<<<< HEAD
       {/* 2. ÁREA DE SCROLL APENAS PARA OS CARDS */}
+=======
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
       <View style={styles.listWrapper}>
         <ScrollView 
           showsVerticalScrollIndicator={false} 
@@ -93,7 +105,10 @@ export default function Carrinho() {
         </ScrollView>
       </View>
 
+<<<<<<< HEAD
       {/* 3. RODAPÉ FIXO (Não scrolla) */}
+=======
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
       <View style={styles.footerRow}>
         <Text style={styles.totalLabel}>Total: R$ 330,87</Text>
         <TouchableOpacity style={styles.finishBtn}>
@@ -128,7 +143,10 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'center'
   },
+<<<<<<< HEAD
   // Wrapper que ocupa o espaço central entre header e footer
+=======
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
   listWrapper: {
     flex: 1, 
   },
@@ -166,7 +184,11 @@ const styles = StyleSheet.create({
   productName: { fontSize: 13, fontWeight: 'bold', color: '#333' },
   productYear: { fontSize: 10, color: '#888' },
   deleteBtn: { padding: 5 },
+<<<<<<< HEAD
   xIcon: { width: 22, height: 22, resizeMode: 'contain' }, // X no tamanho ideal
+=======
+  xIcon: { width: 22, height: 22, resizeMode: 'contain' }, 
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
   bottomInfoRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   productPrice: { fontSize: 14, fontWeight: 'bold', color: '#333' },
   footerRow: { 
@@ -175,7 +197,11 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     paddingHorizontal: 20,
     paddingVertical: 25,
+<<<<<<< HEAD
     backgroundColor: '#F5F0E6', // Mantém a cor do fundo
+=======
+    backgroundColor: '#F5F0E6', 
+>>>>>>> 5388696 (: tela de carrinho e componente QntItem)
     borderTopWidth: 0.5,
     borderTopColor: '#D1C8B4'
   },

@@ -5,6 +5,7 @@ import Vinhos from '../screens/Vinhos.js';
 import Exclusivos from '../screens/Exclusivos.js';
 import WineBox from '../screens/WineBox.js';
 import Assinatura from '../screens/Assinatura.js'; 
+import Carrinho from '../screens/Carrinho.js'; 
 import { SQLiteProvider } from 'expo-sqlite';
 import { initDatabase } from '../services/initDatabase.js';
 import Header from '../components/Header.js';
@@ -21,6 +22,7 @@ export function StackRoutes() {
                     <Screen name="Exclusivos" component={Exclusivos} />
                     <Screen name="WineBox" component={WineBox} />
                     <Screen name="Assinatura" component={Assinatura} />
+                    <Screen name="Carrinho" component={Carrinho} />
                 </Navigator>
             </NavigationContainer>
         </SQLiteProvider>

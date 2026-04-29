@@ -9,6 +9,7 @@ import Carrinho from "../screens/Carrinho.js";
 import Cadastro from "../screens/Cadastro.js";
 import Login from "../screens/Login.js";
 import CadProdutos from "../screens/CadProdutos.js";
+import AdminProdutos from "../screens/AdminProdutos.js"; // <-- Importação da tela nova
 import { SQLiteProvider } from "expo-sqlite";
 import { initDatabase } from "../services/initDatabase.js";
 import DescricaoVinho from "../screens/DescricaoVinho.js";
@@ -19,6 +20,7 @@ import { AuthProvider } from "../context/auth.js";
 import Header from "../components/Header.js";
 import { resetDatabase } from "../services/initDatabase.js";
 import SplashScreen from "../screens/SplashScreen";
+
 const Stack = createNativeStackNavigator();
 
 export function StackRoutes() {
@@ -47,6 +49,7 @@ export function StackRoutes() {
           <Stack.Screen name="Carrinho" component={Carrinho} />
           <Stack.Screen name="DescricaoVinho" component={DescricaoVinho} />
           <Stack.Screen name="CadProdutos" component={CadProdutos} />
+          <Stack.Screen name="AdminProdutos" component={AdminProdutos} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>

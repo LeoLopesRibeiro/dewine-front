@@ -23,21 +23,15 @@ export default function AdminProdutos() {
 
   const getProducts = async () => {
     try {
-      const response = await fetch(`${api}produtos/listar`);
-      if (response.ok) {
-        const data = await response.json();
-        setProducts(data);
-        return;
-      }
+      const query = `
+        SELECT p.*, i.url as url_imagem 
+        FROM produtos p 
+        LEFT JOIN produto_imagens i ON p.id_produto = i.id_produto
+      `;
+      const result = await database.getAllAsync(query);
+      setProducts(result || []);
     } catch (error) {
-      console.error(error);
-    }
-
-    try {
-      const result = await database.getAllAsync("SELECT * FROM produtos");
-      setProducts(result);
-    } catch (error) {
-      console.error(error);
+      console.error("Erro ao buscar produtos:", error);
     }
   };
 
@@ -86,7 +80,6 @@ export default function AdminProdutos() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.headerTitleRow}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -98,6 +91,9 @@ export default function AdminProdutos() {
           />
         </TouchableOpacity>
         <Text style={styles.pageTitle}>Gerenciar Vinhos</Text>
+      </View>
+
+      <View style={styles.actionRow}>
         <TouchableOpacity
           onPress={() => navigation.navigate("CadProdutos", { isEdit: false })}
           style={styles.addBtn}
@@ -111,10 +107,10 @@ export default function AdminProdutos() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
         >
-          {products.map((item) => (
+          {products?.map((item) => (
             <View key={item.id_produto} style={styles.card}>
               <Image
-                source={require("../../assets/fotoExemplo.png")}
+                source={item.url_imagem ? { uri: item.url_imagem } : require("../../assets/fotoExemplo.png")}
                 style={styles.wineImage}
               />
 
@@ -169,7 +165,7 @@ export default function AdminProdutos() {
             {produtoSelecionado && (
               <>
                 <Image
-                  source={require("../../assets/fotoExemplo.png")}
+                  source={produtoSelecionado.url_imagem ? { uri: produtoSelecionado.url_imagem } : require("../../assets/fotoExemplo.png")}
                   style={styles.modalImage}
                 />
                 <Text style={styles.modalTitle}>{produtoSelecionado.nome}</Text>
@@ -223,7 +219,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 20,
     paddingTop: 15,
-    paddingBottom: 20,
+    paddingBottom: 10,
     position: "relative",
   },
   backBtn: {
@@ -243,11 +239,15 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     textAlign: "center",
   },
+  actionRow: {
+    alignItems: "flex-end",
+    paddingHorizontal: 20,
+    marginBottom: 15,
+  },
   addBtn: {
-    position: "absolute",
-    right: 20,
-    top: 18,
-    zIndex: 1,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
   },
   addBtnText: {
     color: "#333",

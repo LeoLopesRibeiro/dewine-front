@@ -1,5 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomNav from "../components/BottomNav";
@@ -10,17 +11,28 @@ export default function Home() {
   const database = useSQLiteContext();
 
   const getProducts = async () => {
-    const result = await database.getAllAsync("SELECT * FROM produtos");
-    setProducts(result);
+    try {
+      const query = `
+        SELECT p.*, 
+        (SELECT url FROM produto_imagens WHERE id_produto = p.id_produto LIMIT 1) as url_imagem 
+        FROM produtos p
+      `;
+      const result = await database.getAllAsync(query);
+      setProducts(result || []);
+    } catch (error) {
+      console.error("Erro ao buscar produtos na Home:", error);
+    }
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getProducts();
+    }, [])
+  );
 
   const firstRow = products.slice(0, 4);
-
   const secondRow = products.slice(4, 8);
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -54,7 +66,6 @@ export default function Home() {
             style={styles.wineImage2}
           />
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
@@ -79,4 +90,9 @@ const styles = StyleSheet.create({
   wineImage2: {
     marginBottom: 80,
   },
+  wineImage: {
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
+  }
 });

@@ -80,7 +80,6 @@ export default function AdminProdutos() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.headerTitleRow}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -92,6 +91,9 @@ export default function AdminProdutos() {
           />
         </TouchableOpacity>
         <Text style={styles.pageTitle}>Gerenciar Vinhos</Text>
+      </View>
+
+      <View style={styles.actionRow}>
         <TouchableOpacity
           onPress={() => navigation.navigate("CadProdutos", { isEdit: false })}
           style={styles.addBtn}
@@ -217,7 +219,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 20,
     paddingTop: 15,
-    paddingBottom: 20,
+    paddingBottom: 10,
     position: "relative",
   },
   backBtn: {
@@ -237,11 +239,15 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     textAlign: "center",
   },
+  actionRow: {
+    alignItems: "flex-end",
+    paddingHorizontal: 20,
+    marginBottom: 15,
+  },
   addBtn: {
-    position: "absolute",
-    right: 20,
-    top: 18,
-    zIndex: 1,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
   },
   addBtnText: {
     color: "#333",

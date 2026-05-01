@@ -63,7 +63,10 @@ export default function WineCard({ idCliente = 1, produto }) {
 
   return (
     <View style={styles.card}>
-      <Image source={FotoVinho} style={styles.wineImage} />
+      <Image
+        source={produto.url_imagem ? { uri: produto.url_imagem } : require("../../assets/fotoExemplo.png")}
+        style={styles.wineImage}
+      />
 
       <Text style={styles.title} numberOfLines={2}>
         {produto?.nome ?? ""}

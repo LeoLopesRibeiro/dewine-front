@@ -40,10 +40,9 @@ export function StackRoutes() {
           <Stack.Screen name="Exclusivos" component={Exclusivos} />
           <Stack.Screen name="WineBox" component={WineBox} />
           <Stack.Screen name="Assinatura" component={Assinatura} />
-          <Stack.Screen name="Carrinho" component={Carrinho} />
+          <Stack.Screen name="Carrinho" component={CartScreen} />
           <Stack.Screen name="DescricaoVinho" component={DescricaoVinho} />
           
-          {/* 👇 AS DUAS TELAS DO ADMIN ADICIONADAS AQUI 👇 */}
           <Stack.Screen name="AdminProdutos" component={AdminProdutos} options={{ headerShown: false }} />
           <Stack.Screen name="CadProdutos" component={CadProdutos} />
         </>

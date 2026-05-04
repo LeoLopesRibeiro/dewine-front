@@ -1,5 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomNav from "../components/BottomNav";
@@ -10,18 +11,28 @@ export default function Home() {
   const database = useSQLiteContext();
 
   const getProducts = async () => {
-    const result = await database.getAllAsync("SELECT * FROM produtos");
-    setProducts(result);
+    try {
+      const query = `
+        SELECT p.*, 
+        (SELECT url FROM produto_imagens WHERE id_produto = p.id_produto LIMIT 1) as url_imagem 
+        FROM produtos p
+      `;
+      const result = await database.getAllAsync(query);
+      setProducts(result || []);
+    } catch (error) {
+      console.error("Erro ao buscar produtos na Home:", error);
+    }
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getProducts();
+    }, [])
+  );
 
   const firstRow = products.slice(0, 4);
-
   const secondRow = products.slice(4, 8);
-  // console.log(secondRow);
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -38,14 +49,7 @@ export default function Home() {
             style={{ marginBottom: 20 }}
           >
             {firstRow.map((product) => {
-              return (
-                <WineCard
-                  key={product.id_produto}
-                  title={product.nome}
-                  year={product.id_produto + 1980}
-                  price={product.preco}
-                />
-              );
+              return <WineCard key={product.id_produto} idCliente={1} produto={product} />;
             })}
           </ScrollView>
           <ScrollView
@@ -54,12 +58,7 @@ export default function Home() {
             contentContainerStyle={styles.cardList}
           >
             {secondRow.map((product) => (
-              <WineCard
-                key={product.id_produto}
-                title={product.nome}
-                year={product.id_produto + 1920}
-                price={product.preco}
-              />
+              <WineCard key={product.id_produto} idCliente={1} produto={product} />
             ))}
           </ScrollView>
           <Image
@@ -67,8 +66,6 @@ export default function Home() {
             style={styles.wineImage2}
           />
         </View>
-
-        {/* <BottomNav></BottomNav> */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -92,5 +89,10 @@ const styles = StyleSheet.create({
   },
   wineImage2: {
     marginBottom: 80,
+  },
+  wineImage: {
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
   }
 });

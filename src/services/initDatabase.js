@@ -128,7 +128,7 @@ INSERT OR IGNORE INTO produtos (nome, categoria, preco, descricao, estoque, ano_
 
 -- ADMIN PADRÃO
 INSERT OR IGNORE INTO cliente (id_cliente, nome, senha, cpf)
-VALUES (1, 'Admin', '$2b$10$2F1g5pKYllgZlnRbP975P.zi7jA3YKHxXy8J2JNo77PPlet.aJBu2', '00000000000');
+VALUES (1, 'Admin', '123456', '00000000000');
 
 INSERT OR IGNORE INTO email (id_cliente, email, tipo)
 VALUES (1, 'admin@admin.com', 'principal');

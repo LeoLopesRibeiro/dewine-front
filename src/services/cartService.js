@@ -1,7 +1,7 @@
 import { api } from "./api";
 
 export const validateCartItem = async (id_cliente, produto, quantidade = 1) => {
-  const response = await fetch(`${api}/cart/validate`, {
+  const response = await fetch(`${api}cart/validate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -19,7 +19,7 @@ export const validateCartItem = async (id_cliente, produto, quantidade = 1) => {
 };
 
 export const submitCheckout = async (id_cliente, itens) => {
-  const response = await fetch(`${api}/cart/checkout`, {
+  const response = await fetch(`${api}cart/checkout`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id_cliente, id_endereco, itens }),
